@@ -1,0 +1,37 @@
+@model AgentViewModel
+@{
+    ViewData["Title"] = "Add Agent";
+}
+
+<div class="w3-card">
+
+<div class="w3-container w3-light-gray">
+  <h2>Add New Agent</h2>
+</div>
+
+<form asp-action="Add" method="post" role="form">
+    <div class="w3-container">
+        <div class="row">
+            <div class="col-xs-12">
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input class="w3-input" type="text" asp-for="Name">
+                <label asp-for="Msisdn">Agent Name</label>
+
+                <input class="w3-input" type="text" asp-for="Msisdn">
+                <label asp-for="Msisdn">MSISDN</label>
+
+                <input class="w3-input" type="password" asp-for="AuthPassword">
+                <label asp-for="AuthPassword">Password</label>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <button type="submit" class="w3-btn w3-red">Save Changes</button><br /><br />
+    </div>
+</form>
+
+</div>

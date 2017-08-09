@@ -1,0 +1,36 @@
+{
+    "version": "0.1.0",
+    "tasks": [{
+            "taskName": "build",
+            "command": "dotnet",
+            "isShellCommand": true,
+            "args": [
+                "${workspaceRoot}/project.json"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "minify",
+            "command": "gulp",
+            "isShellCommand": true,
+            "args": [],
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "options": {
+                "cwd": "${workspaceRoot}/BlueWarriors.Mvc"
+            }
+        },
+        {
+            "taskName": "clean",
+            "command": "gulp",
+            "isShellCommand": true,
+            "args": [],
+            "isBuildCommand": true,
+            "showOutput": "always",
+            "options": {
+                "cwd": "${workspaceRoot}/BlueWarriors.Mvc"
+            }
+        }
+    ]
+}

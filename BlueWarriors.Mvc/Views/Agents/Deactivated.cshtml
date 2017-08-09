@@ -1,0 +1,51 @@
+@model IEnumerable<AgentViewModel>
+@{
+    ViewData["Title"] = "Deactivated Agents";
+}
+
+<div class="w3-container w3-light-gray">
+  <h2>Deactivated Agents</h2>
+</div>
+
+<form asp-controller="Agents" asp-action="Deactivated" method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+            <span class="input-group-btn">
+                <input class="btn btn-primary" value="Search" type="submit" />
+            </span>
+            <input type="text" class="form-control" id="search" name="search" placeholder="Search for agent using name or MSISDN">
+            </div>
+        </div>
+    </div>
+</form>
+<br >
+
+<div class="w3-container">
+    @if(Model != null)
+    {
+        <table class="table table-resposive table-striped table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-lg-4">Agent Name</th>
+                    <th class="col-lg-4">MSISDN</th>
+                    <th class="col-lg-1">Status</th>
+                    <th class="col-lg-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td class="col-lg-4"><span style="text-transform:uppercase;">@item.Name.ToLower()</span></td>
+                        <td class="col-lg-4">@item.Msisdn</td>
+                        <td class="col-lg-1">@item.Status</td>
+                        <td class="col-lg-3">
+                            <a asp-controller="agents" asp-action="file" asp-route-id=@item.AgentId class="w3-button w3-teal">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }    
+</div>

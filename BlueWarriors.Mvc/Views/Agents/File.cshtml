@@ -1,0 +1,43 @@
+@model AgentViewModel
+@{
+    ViewData["Title"] = "Agent File";
+}
+
+<div class="w3-card">
+
+<div class="w3-container w3-light-gray">
+  <h2>Agent: @Model.Name</h2>
+  <p class="w3-mediuim">Status: @Model.Status</p>
+</div>
+
+<form asp-action="File" method="post" role="form">
+    <div class="w3-container">
+        <div class="row">
+            <div class="col-xs-12">
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input type="hidden" asp-for="AgentId">
+                <input type="hidden" asp-for="LeaderId">
+                <input type="hidden" asp-for="AgentTypeId">
+                <input type="hidden" asp-for="RowVersion">
+                <input type="hidden" asp-for="Name">
+                <input type="hidden" asp-for="Status">
+                <input type="hidden" asp-for="Msisdn">
+
+                <input class="w3-input" type="text" asp-for="Msisdn" disabled>
+                <label asp-for="Msisdn">MSISDN</label>
+
+                <input class="w3-input" type="password" asp-for="AuthPassword">
+                <label asp-for="AuthPassword">Password</label>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container">
+        <button type="submit" class="w3-btn w3-red">Save Changes</button><br /><br />
+    </div>
+</form>
+
+</div>
