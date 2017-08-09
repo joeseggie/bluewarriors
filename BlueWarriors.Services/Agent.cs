@@ -5,11 +5,15 @@ using System.Collections.Generic;
 using BlueWarriors.Services.Extensions;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace BlueWarriors.Services
 {
     public class Agent : IAgent
     {
+        private readonly IConfigurationRoot _configuration;
+
         public int AgentId { get; set; }
         public string Name { get; set; }
         public int Msisdn { get; set; }
@@ -19,6 +23,15 @@ namespace BlueWarriors.Services
         public byte[] RowVersion { get; set; }
         public string AuthPassword { get; set; }
         public DateTime? DeactivationDate { get; set; }
+
+        public Agent()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.Secret.json");
+
+            _configuration = builder.Build();
+        }
 
         public bool IsAuthenticated(string msisdn, string password)
         {
@@ -64,7 +77,7 @@ namespace BlueWarriors.Services
                     {
                         while (dataReader.Read())
                         {
-                            agentsList.Add(new Agent(){
+                            agentsList.Add(new Agent{
                                 AgentId = dataReader.GetInt32(0),
                                 Name = dataReader.GetNullableString(1),
                                 Msisdn = dataReader.GetInt32(2),
@@ -251,7 +264,12 @@ namespace BlueWarriors.Services
 
         private SqlConnection DatabaseConnection()
         {
-            return new SqlConnection("Data Source=172.25.0.26;Initial Catalog=BW;User Id=pps;Password=pps1234;");
+            var server = _configuration["server"];
+            var database = _configuration["database"];
+            var username = _configuration["username"];
+            var password = _configuration["password"];
+
+            return new SqlConnection($"Data Source={server};Initial Catalog={database};User Id={username};Password={password};");
         }
     }
 }
