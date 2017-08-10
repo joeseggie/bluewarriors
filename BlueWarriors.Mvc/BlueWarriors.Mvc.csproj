@@ -11,13 +11,11 @@
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.3.1" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="wwwroot\**\*;nlog.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\BlueWarriors.Services\BlueWarriors.Services.csproj" />
   </ItemGroup>
