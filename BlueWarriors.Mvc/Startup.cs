@@ -37,6 +37,8 @@ namespace BlueWarriors.Mvc
             // Add framework services.
             services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
             services.AddTransient<IAgent, Agent>();
+            services.AddTransient<IAgentLeader, AgentLeader>();
+            services.AddTransient<ISmsMessage, SmsMessage>();
             services.AddAntiforgery();
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
