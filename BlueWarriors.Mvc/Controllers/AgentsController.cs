@@ -14,11 +14,13 @@ namespace BlueWarriors.Mvc.Controllers
     {
         private readonly IAgent _agentService;
         private readonly ILogger<AgentsController> _logger;
+        private readonly ISmsMessage _smsService;
 
-        public AgentsController(IAgent agentService, ILogger<AgentsController> logger)
+        public AgentsController(IAgent agentService, ILogger<AgentsController> logger, ISmsMessage smsService)
         {
             _agentService = agentService;
             _logger = logger;
+            _smsService = smsService;
         }
 
         public IActionResult Index(string search)
@@ -101,6 +103,11 @@ namespace BlueWarriors.Mvc.Controllers
                     RowVersion = model.RowVersion,
                     AuthPassword = model.AuthPassword
                 });
+                
+                if(model.AuthPassword != string.Empty && !string.IsNullOrWhiteSpace(model.AuthPassword))
+                {
+                    _smsService.Send($"Your SIM registration app password has been changed to {model.AuthPassword}", model.Msisdn.ToString());
+                }
 
                 return RedirectToAction("file", routeValues: new{ id = result});
             }
@@ -122,7 +129,12 @@ namespace BlueWarriors.Mvc.Controllers
                     Name = model.Name,
                     Msisdn = model.Msisdn,
                     AuthPassword = model.AuthPassword
-                });
+                });                
+                
+                if(model.AuthPassword != string.Empty && !string.IsNullOrWhiteSpace(model.AuthPassword))
+                {
+                    _smsService.Send($"Your SIM registration app password is {model.AuthPassword}", model.Msisdn.ToString());
+                }
 
                 return RedirectToAction("file", routeValues: new{id = result});
             }
