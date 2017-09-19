@@ -7,7 +7,7 @@ using BlueWarriors.Mvc.Models;
 
 namespace BlueWarriors.Mvc.Repository
 {
-    public class RegionRepository : IRepository<Region>
+    public class RegionRepository<T> : IRepository<Region> where T: Region
     {
         private readonly IDatabaseConnection _databaseConnection;
 

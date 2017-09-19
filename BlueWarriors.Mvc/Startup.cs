@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlueWarriors.Services;
+using Bluewarriors.Mvc.Repository;
+using BlueWarriors.Mvc.Repository;
+using BlueWarriors.Mvc.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Neleus.DependencyInjection.Extensions;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using BlueWarriors.Services;
 
 namespace BlueWarriors.Mvc
 {
@@ -36,12 +40,14 @@ namespace BlueWarriors.Mvc
         {
             // Add framework services.
             services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
-            services.AddTransient<IAgent, Agent>();
-            services.AddTransient<IAgentLeader, AgentLeader>();
-            services.AddTransient<ISmsMessage, SmsMessage>();
             services.AddAntiforgery();
             //call this in case you need aspnet-user-authtype/aspnet-user-identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IAgent, Agent>();
+            services.AddTransient<IAgentLeader, AgentLeader>();
+            services.AddTransient<IDatabaseConnection, DatabaseConnection>();
+            services.AddTransient<ISmsMessage, SmsMessage>();
+            services.AddTransient<IRepository<Region>, RegionRepository<Region>>();
             services.AddMvc();
         }
 
