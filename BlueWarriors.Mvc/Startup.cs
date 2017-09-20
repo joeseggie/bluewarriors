@@ -50,6 +50,7 @@ namespace BlueWarriors.Mvc
             services.AddTransient<IRepository<Region>, RegionRepository<Region>>();
             services.AddTransient<IRepository<Department>, DepartmentRepository<Department>>();
             services.AddTransient<IRepository<LeaderType>, LeaderTypeRepository<LeaderType>>();
+            services.AddTransient<IRepository<Leader>, LeaderRepository<Leader>>();
             services.AddMvc();
         }
 
