@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Bluewarriors.Mvc.Repository;
-using BlueWarriors.Mvc.Models;
+using Bluewarriors.Mvc.Models;
 
 namespace BlueWarriors.Mvc.Repository
 {

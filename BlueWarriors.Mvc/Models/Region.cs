@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace BlueWarriors.Mvc.Models
+namespace Bluewarriors.Mvc.Models
 {
     public class Region
     {
