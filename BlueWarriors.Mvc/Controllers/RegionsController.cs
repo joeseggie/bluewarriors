@@ -28,6 +28,30 @@ namespace BlueWarriors.Mvc.Controllers
             return View(model);
         }
 
+        public IActionResult New()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> New(RegionViewModel formData)
+        {
+            if(ModelState.IsValid)
+            {
+                await _repository.AddAsync(new Region{
+                    Name = formData.Name
+                });
+                return RedirectToAction("index");
+            }
+
+            return View(formData);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+
         public async Task<IActionResult> Region(int id)
         {
             var regionQuery = await _repository.GetAsync(id);
