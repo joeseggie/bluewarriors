@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bluewarriors.Mvc.Repository;
 using BlueWarriors.Mvc.Repository;
-using BlueWarriors.Mvc.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +14,7 @@ using Neleus.DependencyInjection.Extensions;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using BlueWarriors.Services;
+using Bluewarriors.Mvc.Models;
 
 namespace BlueWarriors.Mvc
 {
@@ -48,6 +48,8 @@ namespace BlueWarriors.Mvc
             services.AddTransient<IDatabaseConnection, DatabaseConnection>();
             services.AddTransient<ISmsMessage, SmsMessage>();
             services.AddTransient<IRepository<Region>, RegionRepository<Region>>();
+            services.AddTransient<IRepository<Department>, DepartmentRepository<Department>>();
+            services.AddTransient<IRepository<LeaderType>, LeaderTypeRepository<LeaderType>>();
             services.AddMvc();
         }
 
