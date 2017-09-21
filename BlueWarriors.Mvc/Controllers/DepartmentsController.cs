@@ -22,7 +22,7 @@ namespace BlueWarriors.Mvc.Controllers
             var model = departmentsQuery.Select(d => new DepartmentViewModel{
                 DepartmentId = d.DepartmentId,
                 Name = d.Name
-            });
+            }).ToList();
 
             return View(model);
         }
