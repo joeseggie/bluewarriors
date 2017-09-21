@@ -55,6 +55,8 @@ namespace BlueWarriors.Mvc.Controllers
         public async Task<IActionResult> Region(int id)
         {
             var regionQuery = await _repository.GetAsync(id);
+            if(regionQuery == null){ return View("index"); }
+
             var model = new RegionViewModel{
                 RegionId = regionQuery.RegionId,
                 Name = regionQuery.Name
@@ -74,7 +76,7 @@ namespace BlueWarriors.Mvc.Controllers
                     Name = formData.Name
                 });
 
-                return RedirectToAction("index");
+                return RedirectToAction("region", routeValues: new { id = formData.RegionId } );
             }
 
             return View(formData);
